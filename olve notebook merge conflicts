@@ -1,0 +1,68 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 36911d1..c74fc93 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1,18 +1,20 @@[m
+ # Obligatorio de Inteligencia Artificial[m
+ [m
+[31m-Proyecto de predicción de cancelaciones hoteleras. El análisis, la partición temporal, el entrenamiento y la evaluación están documentados en [obligatorio_hotel_cancelaciones.ipynb](./obligatorio_hotel_cancelaciones.ipynb).[m
+[32m+[m[32mProyecto académico de predicción de cancelaciones hoteleras. El análisis, la partición temporal, el entrenamiento y la evaluación están documentados en [obligatorio_hotel_cancelaciones.ipynb](./obligatorio_hotel_cancelaciones.ipynb). El informe actualizado del equipo se mantiene en Google Drive.[m
+ [m
+ ## Archivos[m
+ [m
+ - `hotel_bookings.csv`: datos del proyecto.[m
+[31m-- `Obligatorio IA - Informe final unificado.pdf`: informe final listo para entregar.[m
+[31m-- `Obligatorio IA - Informe final unificado.docx`: fuente editable del informe final con anexo de resultados metodológicos.[m
+[31m-- `hotel_cancellation_pipeline.joblib` y `predict.py`: pipeline calibrado y script de predicción.[m
+[31m-- `requirements.txt`: versiones de las dependencias Python.[m
+[32m+[m[32m- `obligatorio_hotel_cancelaciones.ipynb`: análisis y evaluación.[m
+[32m+[m[32m- `requirements.txt`: versiones fijadas de las dependencias Python.[m
+[32m+[m[32m- `hotel_cancellation_pipeline.joblib` y `predict.py`, cuando estén disponibles: pipeline calibrado y script de predicción.[m
+[32m+[m[32m- Informe final en Google Drive y sus exportaciones DOCX/PDF.[m
+ [m
+ ## Ejecución[m
+ [m
+[31m-El entorno previsto es Google Colab. También se puede abrir el notebook desde VS Code con la extensión Jupyter:[m
+[32m+[m[32mEn Google Colab, conserva `hotel_bookings.csv` junto al notebook o usa el enlace de descarga configurado en la celda de carga. El badge del notebook abre la versión de la rama `Sabine`.[m
+[32m+[m
+[32m+[m[32mPara ejecución local en Windows:[m
+ [m
+ ```powershell[m
+ py -m venv .venv[m
+[36m@@ -20,9 +22,11 @@[m [mpy -m venv .venv[m
+ python -m pip install -r requirements.txt[m
+ ```[m
+ [m
+[31m-En Colab, conservar `hotel_bookings.csv` junto al notebook o usar el enlace del badge al inicio del archivo. Ejecutar el notebook con **Restart & Run All**; la celda del holdout queda desactivada para impedir una segunda evaluación.[m
+[32m+[m[32mLa partición crea `test_holdout.csv` localmente. Está excluido de Git: no lo fuerces ni lo agregues al repositorio. El holdout ya se evaluó una sola vez; la celda de evaluación está protegida y desactivada. No lo vuelvas a abrir para seleccionar modelos, variables o umbrales.[m
+[32m+[m
+[32m+[m[32m## Flujo de ramas[m
+ [m
+[31m-La celda de partición genera `test_holdout.csv` localmente; el archivo está excluido de Git. El holdout se evaluó una sola vez con el umbral acordado FP=FN=1 (0,50); sus métricas e intervalos están guardados en los outputs del notebook y en el informe final. No usarlo para seleccionar modelos, variables ni umbrales. La evaluación está desactivada al volver a ejecutar el notebook.[m
+[32m+[m[32mTrabaja en una rama propia y abre un pull request hacia `main`. No hagas commits directamente en `main`; revisa que el pull request no incluya `test_holdout.csv` ni artefactos generados. El repositorio aún necesita una regla de protección de rama en GitHub para hacer cumplir este flujo.[m
+ [m
+ ## Datos y limitaciones[m
+ [m
+[1mdiff --git a/obligatorio_hotel_cancelaciones.ipynb b/obligatorio_hotel_cancelaciones.ipynb[m
+[1mindex f1339b2..f41bf79 100644[m
+[1m--- a/obligatorio_hotel_cancelaciones.ipynb[m
+[1m+++ b/obligatorio_hotel_cancelaciones.ipynb[m
+[36m@@ -8,7 +8,7 @@[m
+     "id": "view-in-github"[m
+    },[m
+    "source": [[m
+[31m-    "<a href=\"https://colab.research.google.com/github/sabthe02/Obligatorio-IA/blob/Pato/obligatorio_hotel_cancelaciones.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"[m
+[32m+[m[32m    "<a href=\"https://colab.research.google.com/github/sabthe02/Obligatorio-IA/blob/Sabine/obligatorio_hotel_cancelaciones.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"[m
+    ][m
+   },[m
+   {[m
+[36m@@ -4199,7 +4199,8 @@[m
+    "source": [[m
+     "## 7. Evaluación final e interpretación\n",[m
+     "\n",[m
+[31m-    "El holdout se evaluó una sola vez después de cerrar el modelo y el umbral. El informe de avance advierte que una versión previa inspeccionó etiquetas de un holdout por fecha de llegada y que hay filas compartidas; por eso esta partición no es completamente ciega. No usar estos resultados para elegir hiperparámetros ni reentrenar. La celda está protegida con `RUN_FINAL_TEST_EVALUATION = False` para impedir una segunda evaluación; las métricas y el bootstrap de 1.000 réplicas quedaron guardados en los outputs y el informe final."[m
+[32m+[m[32m    "El holdout se evaluó una sola vez después de cerrar el modelo y el umbral. El informe de avance advierte que una versión previa inspeccionó etiquetas de un holdout por fecha de llegada y que hay filas compartidas; por eso esta partición no es completamente ciega. No usar estos resultados para elegir hiperparámetros ni reentrenar. La celda está protegida con `RUN_FINAL_TEST_EVALUATION = False` para impedir una segunda evaluación; las métricas y el bootstrap de 1.000 réplicas quedaron guardados en los outputs y el informe final.\n",[m
+[32m+[m[32m    " El intervalo informado usa bootstrap IID por fila; al tratarse de una partici?n temporal, no modela dependencia entre reservas cercanas y puede subestimar la incertidumbre. No se recalcul? el intervalo para evitar reabrir el holdout."[m
+    ][m
+   },[m
+   {[m

@@ -1,18 +1,20 @@
 # Obligatorio de Inteligencia Artificial
 
-Proyecto de predicción de cancelaciones hoteleras. El análisis, la partición temporal, el entrenamiento y la evaluación están documentados en [obligatorio_hotel_cancelaciones.ipynb](./obligatorio_hotel_cancelaciones.ipynb).
+Proyecto académico de predicción de cancelaciones hoteleras. El análisis, la partición temporal, el entrenamiento y la evaluación están documentados en [obligatorio_hotel_cancelaciones.ipynb](./obligatorio_hotel_cancelaciones.ipynb). El informe actualizado del equipo se mantiene en Google Drive.
 
 ## Archivos
 
 - `hotel_bookings.csv`: datos del proyecto.
-- `Obligatorio IA - Informe final unificado.pdf`: informe final listo para entregar.
-- `Obligatorio IA - Informe final unificado.docx`: fuente editable del informe final con anexo de resultados metodológicos.
-- `hotel_cancellation_pipeline.joblib` y `predict.py`: pipeline calibrado y script de predicción.
-- `requirements.txt`: versiones de las dependencias Python.
+- `obligatorio_hotel_cancelaciones.ipynb`: análisis y evaluación.
+- `requirements.txt`: versiones fijadas de las dependencias Python.
+- `hotel_cancellation_pipeline.joblib` y `predict.py`, cuando estén disponibles: pipeline calibrado y script de predicción.
+- Informe final en Google Drive y sus exportaciones DOCX/PDF.
 
 ## Ejecución
 
-El entorno previsto es Google Colab. También se puede abrir el notebook desde VS Code con la extensión Jupyter:
+En Google Colab, conserva `hotel_bookings.csv` junto al notebook o usa el enlace de descarga configurado en la celda de carga. El badge del notebook abre la versión de la rama `Sabine`.
+
+Para ejecución local en Windows:
 
 ```powershell
 py -m venv .venv
@@ -20,9 +22,11 @@ py -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-En Colab, conservar `hotel_bookings.csv` junto al notebook o usar el enlace del badge al inicio del archivo. Ejecutar el notebook con **Restart & Run All**; la celda del holdout queda desactivada para impedir una segunda evaluación.
+La partición crea `test_holdout.csv` localmente. Está excluido de Git: no lo fuerces ni lo agregues al repositorio. El holdout ya se evaluó una sola vez; la celda de evaluación está protegida y desactivada. No lo vuelvas a abrir para seleccionar modelos, variables o umbrales.
 
-La celda de partición genera `test_holdout.csv` localmente; el archivo está excluido de Git. El holdout se evaluó una sola vez con el umbral acordado FP=FN=1 (0,50); sus métricas e intervalos están guardados en los outputs del notebook y en el informe final. No usarlo para seleccionar modelos, variables ni umbrales. La evaluación está desactivada al volver a ejecutar el notebook.
+## Flujo de ramas
+
+Trabaja en una rama propia y abre un pull request hacia `main`. No hagas commits directamente en `main`; revisa que el pull request no incluya `test_holdout.csv` ni artefactos generados. El repositorio aún necesita una regla de protección de rama en GitHub para hacer cumplir este flujo.
 
 ## Datos y limitaciones
 
