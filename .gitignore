@@ -1,0 +1,3 @@
+# Keep the reserved final-evaluation holdout local.
+test_holdout.csv
+__pycache__/
