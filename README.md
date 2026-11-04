@@ -5,10 +5,8 @@ Proyecto de predicción de cancelaciones hoteleras. El análisis, la partición 
 ## Archivos
 
 - `hotel_bookings.csv`: datos del proyecto.
-- `Informe final - Cancelaciones hoteleras.pdf`: informe final (3 páginas).
-- `Informe final - Cancelaciones hoteleras.docx`: fuente editable del informe final.
-- `Obligatorio Inteligencia Artificial.docx`: informe original del equipo.
-- `Obligatorio Inteligencia Artificial - actualizado.docx`: informe del equipo con anexo de resultados.
+- `Obligatorio IA - Informe final unificado.pdf`: informe final listo para entregar.
+- `Obligatorio IA - Informe final unificado.docx`: fuente editable del informe final con anexo de resultados metodológicos.
 - `hotel_cancellation_pipeline.joblib` y `predict.py`: pipeline calibrado y script de predicción.
 - `requirements.txt`: versiones de las dependencias Python.
 
