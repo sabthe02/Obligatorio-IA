@@ -5,7 +5,11 @@ Proyecto de predicción de cancelaciones hoteleras. El análisis, la partición 
 ## Archivos
 
 - `hotel_bookings.csv`: datos del proyecto.
-- `Obligatorio Inteligencia Artificial.docx`: informe del equipo.
+- `Informe final - Cancelaciones hoteleras.pdf`: informe final (3 páginas).
+- `Informe final - Cancelaciones hoteleras.docx`: fuente editable del informe final.
+- `Obligatorio Inteligencia Artificial.docx`: informe original del equipo.
+- `Obligatorio Inteligencia Artificial - actualizado.docx`: informe del equipo con anexo de resultados.
+- `hotel_cancellation_pipeline.joblib` y `predict.py`: pipeline calibrado y script de predicción.
 - `requirements.txt`: versiones de las dependencias Python.
 
 ## Ejecución
@@ -18,9 +22,9 @@ py -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-En Colab, conservar `hotel_bookings.csv` junto al notebook o usar el enlace del badge al inicio del archivo.
+En Colab, conservar `hotel_bookings.csv` junto al notebook o usar el enlace del badge al inicio del archivo. Ejecutar el notebook con **Restart & Run All**; la celda del holdout queda desactivada para impedir una segunda evaluación.
 
-La celda de partición genera `test_holdout.csv` localmente; el archivo está excluido de Git. La evaluación final permanece desactivada hasta acordar el umbral operativo. No se debe usar el holdout para seleccionar modelos, variables ni umbrales.
+La celda de partición genera `test_holdout.csv` localmente; el archivo está excluido de Git. El holdout se evaluó una sola vez con el umbral acordado FP=FN=1 (0,50); sus métricas e intervalos están guardados en los outputs del notebook y en el informe final. No usarlo para seleccionar modelos, variables ni umbrales. La evaluación está desactivada al volver a ejecutar el notebook.
 
 ## Datos y limitaciones
 
